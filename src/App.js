@@ -1,17 +1,18 @@
-import logo from "./laskettelija.webp";
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="Otsikko">LASKULASKURI</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <div className="box-container">
-          <div className="box">Box 1</div>
-          <div className="box">Box 2</div>
-        </div>
-      </header>
+    <div className="app">
+      <Header />
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </main>
     </div>
   );
 }
