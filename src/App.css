@@ -13,8 +13,12 @@
   }
 }
 
+.Otsikko {
+  color: whitesmoke;
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: pink;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,8 +28,23 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.box-container {
+  display: flex;
+  gap: 16px; /* space between boxes */
+  justify-content: center; /* center them horizontally */
+  margin-top: 20px;
+}
+
+.box {
+  width: 400px;
+  height: 100px;
+  background-color: #ffffff33;
+  border: 2px solid white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 @keyframes App-logo-spin {

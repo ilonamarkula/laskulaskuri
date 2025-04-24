@@ -5,16 +5,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1 className="Otsikko">LASKULASKURI</h1>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>LASKULASKURI</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="box-container">
+          <div className="box">Box 1</div>
+          <div className="box">Box 2</div>
+        </div>
       </header>
     </div>
   );
