@@ -51,6 +51,16 @@ body {
   margin: 12px; /* Varmistaa, että kuva ei mene reunan yli */
 }
 
+.title-image2 {
+    width: 400px; /* tai se mitä aiemmin säädit */
+    height: auto;
+    position: absolute;
+    top: -350px; /* nostaa 40px ylemmäs */
+    left: 320px;
+    margin: 12px;
+  }
+  
+
 .button-container {
   background-color: #b9d4e7; /* Erillinen vaalea laatikko nappien taustaksi */
   padding: 120px 300px;
