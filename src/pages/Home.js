@@ -5,7 +5,7 @@ export default function Home() {
     <section className="home">
       <h1 className="title">LASKULASKURI</h1>
       <div className="button-container">
-        <Link to="/" className="home-button">
+        <Link to="/laskuri" className="home-button">
           Aloita budjetointi
         </Link>
         <Link to="/instructions" className="home-button">
