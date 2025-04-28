@@ -8,10 +8,10 @@ export default function Home() {
         <Link to="/" className="home-button">
           Aloita budjetointi
         </Link>
-        <Link to="/about" className="home-button">
+        <Link to="/instructions" className="home-button">
           Ohjeet
         </Link>
-        <Link to="/instructions" className="home-button">
+        <Link to="/about" className="home-button">
           Meistä
         </Link>
       </div>
