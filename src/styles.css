@@ -28,7 +28,7 @@ body {
   align-items: center;
   justify-content: flex-start; /* Sisältö alkaa ylhäältä */
   min-height: 100vh;
-  background-color: whitesmoke;
+  background-color: white;
 }
 
 .title {
@@ -45,13 +45,14 @@ body {
 
 
 .button-container {
-  background-color: aliceblue; /* Erillinen vaalea laatikko nappien taustaksi */
+  background-color: #b9d4e7; /* Erillinen vaalea laatikko nappien taustaksi */
   padding: 120px 300px;
-  border-radius: 5px;
+  border-radius: 2px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 30px;
+  border: 1px solid;
 }
 
 .button-container button {
@@ -59,7 +60,7 @@ body {
   padding: 10px 20px;
   cursor: pointer;
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
   background-color: white;
   color: white;
   transition: background-color 0.3s;
@@ -70,32 +71,34 @@ body {
   padding: 25px 100px;
   font-family: "Andale Mono", monospace;
   cursor: pointer;
-  border: none;
+  border: 5px solid pink;
   border-radius: 8px;
   background-color: white;
   color: black;
   text-align: center;
   text-decoration: none; /* poistaa linkkiviivan */
-  transition: background-color 0.3s;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
-    -2px -2px 5px rgba(255, 255, 255, 0.4); /* Varjot oikealle ja ylös */
   transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+  position: relative;
+  z-index: 1; /* Varmistaa, että napin varjot näkyvät oikein */
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3),
+    /* Ulompi varjo */ -4px -4px 8px rgba(255, 255, 255, 0.5); /* Sisempi heikompi varjo */
 }
 
-.button-container button:hover {
+/* Hover-tilan tyylit */
+.home-button:hover {
   background-color: white; /* Pidetään tausta valkoisena hoverissa */
   transform: translateY(-8px) translateX(8px); /* Nosto ja siirto oikealle ylös */
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3),
-    -4px -4px 8px rgba(255, 255, 255, 0.5); /* Syvempi varjo hover-tilassa */
-  border: 4px solid pink; /* Ulompi pinkki reuna pysyy */
-  outline: 3px solid pink; /* Sisempi ääriviiva luo kaksinkertaisen reunan */
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4),
+    /* Syvempi varjo hover-tilassa */ -5px -5px 10px rgba(255, 255, 255, 0.6); /* Kirkastunut varjo hoverissa */
+  border: 4px solid pink; /* Pinkki ulompi reuna */
+  outline: 3px solid pink; /* Pinkki sisempi ääriviiva */
 }
 
-.button-container button:active,
+/* Active-tilan tyylit */
 .home-button:active {
-  transform: translateY(-4px) translateX(4px); /* Pienempi nosto aktivoidessa */
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4),
-    -2px -2px 4px rgba(255, 255, 255, 0.5); /* Vahvempi varjo */
+  transform: translateY(6px) translateX(6px); /* Napin liike alas (painuu alas) */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.7); /* Vahvempi varjo painettaessa */
   outline: 2px solid pink; /* Sisempi ääriviiva aktivoidessa */
 }
 
