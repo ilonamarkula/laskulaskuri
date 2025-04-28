@@ -11,7 +11,7 @@ export default function Home() {
         <Link to="/about" className="home-button">
           Ohjeet
         </Link>
-        <Link to="/about" className="home-button">
+        <Link to="/instructions" className="home-button">
           Meistä
         </Link>
       </div>
