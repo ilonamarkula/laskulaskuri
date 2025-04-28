@@ -20,7 +20,58 @@ body {
 
 .content {
   flex-grow: 1;
-  padding: 20px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: whitesmoke;
+}
+
+.title {
+  font-family: "Andale Mono", monospace;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.button-container {
+  background-color: aliceblue; /* Erillinen vaalea laatikko nappien taustaksi */
+  padding: 200px 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button-container button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.home-button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  text-decoration: none; /* poistaa linkkiviivan */
+  transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+  background-color: pink;
 }
 
 /* Header */
