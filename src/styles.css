@@ -37,28 +37,12 @@ body {
   margin-top: 60px;
   margin-bottom: 40px;
   position: relative;
-  text-align: center; /* Keskittää tekstin */
+  text-align: center;
+  color: black; /* Tai joku syvempi punainen kuten #8B0000 */
+
 }
 
-.title::before,
-.title::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  height: 3px;
-  background-color: darkblue;
-  width: 150px; /* vähän pidempi viiva */
-}
 
-.title::before {
-  right: 100%;
-  margin-right: 20px; /* pieni väli tekstin ja viivan väliin */
-}
-
-.title::after {
-  left: 100%;
-  margin-left: 20px; /* pieni väli tekstin ja viivan väliin */
-}
 
 .button-container {
   background-color: aliceblue; /* Erillinen vaalea laatikko nappien taustaksi */
