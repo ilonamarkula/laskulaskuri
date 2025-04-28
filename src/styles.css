@@ -36,6 +36,28 @@ body {
   font-size: 2.9rem;
   margin-top: 60px;
   margin-bottom: 40px;
+  position: relative;
+  text-align: center; /* Keskittää tekstin */
+}
+
+.title::before,
+.title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 3px;
+  background-color: darkblue;
+  width: 150px; /* vähän pidempi viiva */
+}
+
+.title::before {
+  right: 100%;
+  margin-right: 20px; /* pieni väli tekstin ja viivan väliin */
+}
+
+.title::after {
+  left: 100%;
+  margin-left: 20px; /* pieni väli tekstin ja viivan väliin */
 }
 
 .button-container {
