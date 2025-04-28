@@ -34,6 +34,7 @@ body {
 
 .title {
   font-family: "Andale Mono", monospace;
+  font-weight: 100;
   font-size: 2.9rem;
   color: black;
   text-align: center;
@@ -43,23 +44,22 @@ body {
 }
 
 .title-image {
-  width: 200px; 
+  width: 200px;
   height: auto;
-  position: absolute; 
+  position: absolute;
   top: 0;
   right: 320px;
-  margin: 12px; 
+  margin: 12px;
 }
 
 .title-image2 {
-    width: 350px; 
-    height: auto;
-    position: absolute;
-    top: -2.1px; 
-    left: 320px;
-    margin: 12px;
-  }
-  
+  width: 350px;
+  height: auto;
+  position: absolute;
+  top: -2.1px;
+  left: 320px;
+  margin: 12px;
+}
 
 .button-container {
   background-color: #b9d4e7; /* Erillinen vaalea laatikko nappien taustaksi */
@@ -70,6 +70,7 @@ body {
   flex-direction: column;
   gap: 30px;
   border: 2px solid;
+  z-index: 10;
 }
 
 .button-container button {
