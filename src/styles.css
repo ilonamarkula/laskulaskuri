@@ -29,20 +29,27 @@ body {
   justify-content: flex-start; /* Sisältö alkaa ylhäältä */
   min-height: 100vh;
   background-color: white;
+  position: relative; /* Lisätty, jotta kuva voi olla suhteessa home-elemnttiin */
 }
 
 .title {
   font-family: "Andale Mono", monospace;
   font-size: 2.9rem;
+  color: black;
+  text-align: center;
   margin-top: 60px;
   margin-bottom: 40px;
-  position: relative;
-  text-align: center;
-  color: black; /* Tai joku syvempi punainen kuten #8B0000 */
-
+  position: relative; /* Lisätty, jotta kuva voidaan sijoittaa päälle */
 }
 
-
+.title-image {
+  width: 200px; /* Säädä kuvakoko tarpeen mukaan */
+  height: auto;
+  position: absolute; /* Kiinnitetään kuva oikeaan yläkulmaan */
+  top: 0;
+  right: 320px;
+  margin: 12px; /* Varmistaa, että kuva ei mene reunan yli */
+}
 
 .button-container {
   background-color: #b9d4e7; /* Erillinen vaalea laatikko nappien taustaksi */
@@ -52,7 +59,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  border: 1px solid;
+  border: 2px solid;
 }
 
 .button-container button {

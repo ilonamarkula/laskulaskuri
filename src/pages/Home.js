@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
+import laskutyyppiImage from "../laskutyyppi_transparent.png";
 
 export default function Home() {
   return (
     <section className="home">
-      <h1 className="title">LASKULASKURI</h1>
+      <h1 className="title">
+        LASKULASKURI
+        <img src={laskutyyppiImage} alt="Laskutyyppi" className="title-image" />
+      </h1>
       <div className="button-container">
         <Link to="/laskuri" className="home-button">
           Aloita budjetointi
