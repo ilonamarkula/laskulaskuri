@@ -72,7 +72,6 @@ body {
 
 .button-container button {
   font-size: 1.2rem;
-  font-family: "Andale Mono", monospace;
   padding: 10px 20px;
   cursor: pointer;
   border: none;
@@ -84,7 +83,8 @@ body {
 
 .home-button {
   font-size: 1.2rem;
-  padding: 15px 100px;
+  padding: 25px 100px;
+  font-family: "Andale Mono", monospace;
   cursor: pointer;
   border: none;
   border-radius: 8px;
@@ -93,10 +93,26 @@ body {
   text-align: center;
   text-decoration: none; /* poistaa linkkiviivan */
   transition: background-color 0.3s;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+    -2px -2px 5px rgba(255, 255, 255, 0.4); /* Varjot oikealle ja ylös */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
 }
 
 .button-container button:hover {
-  background-color: pink;
+  background-color: white; /* Pidetään tausta valkoisena hoverissa */
+  transform: translateY(-8px) translateX(8px); /* Nosto ja siirto oikealle ylös */
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3),
+    -4px -4px 8px rgba(255, 255, 255, 0.5); /* Syvempi varjo hover-tilassa */
+  border: 4px solid pink; /* Ulompi pinkki reuna pysyy */
+  outline: 3px solid pink; /* Sisempi ääriviiva luo kaksinkertaisen reunan */
+}
+
+.button-container button:active,
+.home-button:active {
+  transform: translateY(-4px) translateX(4px); /* Pienempi nosto aktivoidessa */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4),
+    -2px -2px 4px rgba(255, 255, 255, 0.5); /* Vahvempi varjo */
+  outline: 2px solid pink; /* Sisempi ääriviiva aktivoidessa */
 }
 
 /* Header */
