@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import laskutyyppiImage from "../laskutyyppi_transparent.png";
-import Vuoret from "../vuoret_transparent.png";
+import Vuoret from "../mountains_transparent.png";
 
 export default function Home() {
   return (

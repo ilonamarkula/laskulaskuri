@@ -52,10 +52,10 @@ body {
 }
 
 .title-image2 {
-    width: 400px; /* tai se mitä aiemmin säädit */
+    width: 350px; /* tai se mitä aiemmin säädit */
     height: auto;
     position: absolute;
-    top: -350px; /* nostaa 40px ylemmäs */
+    top: -2.1px; /* nostaa 40px ylemmäs */
     left: 320px;
     margin: 12px;
   }
