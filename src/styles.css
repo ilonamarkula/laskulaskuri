@@ -43,19 +43,19 @@ body {
 }
 
 .title-image {
-  width: 200px; /* Säädä kuvakoko tarpeen mukaan */
+  width: 200px; 
   height: auto;
-  position: absolute; /* Kiinnitetään kuva oikeaan yläkulmaan */
+  position: absolute; 
   top: 0;
   right: 320px;
-  margin: 12px; /* Varmistaa, että kuva ei mene reunan yli */
+  margin: 12px; 
 }
 
 .title-image2 {
-    width: 350px; /* tai se mitä aiemmin säädit */
+    width: 350px; 
     height: auto;
     position: absolute;
-    top: -2.1px; /* nostaa 40px ylemmäs */
+    top: -2.1px; 
     left: 320px;
     margin: 12px;
   }
