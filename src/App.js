@@ -5,7 +5,6 @@ import About from "./pages/About";
 import Instructions from "./pages/Instructions";
 import Laskuri from "./pages/Laskuri";
 
-
 function App() {
   return (
     <div className="app">
@@ -13,8 +12,6 @@ function App() {
       <main className="content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/instructions" element={<Instructions/>} />
           <Route path="/laskuri" element={<Laskuri />} />
         </Routes>
       </main>
