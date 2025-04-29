@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaPen } from 'react-icons/fa';
-
+import { SlMenu } from 'react-icons/sl';
+import { Link } from 'react-router-dom';
 
 
 export default function Laskuri() {
@@ -10,7 +11,6 @@ export default function Laskuri() {
   const [muokkausKaynnissa, setMuokkausKaynnissa] = useState(false);
   const [tilapNimi, setTilapNimi] = useState(matkanNimi);
 
-  // Lue nimi sessionStoragesta kun komponentti latautuu
   useEffect(() => {
     const tallennettu = sessionStorage.getItem(STORAGE_KEY);
     if (tallennettu) {
@@ -31,9 +31,26 @@ export default function Laskuri() {
     }
   };
 
+  const aloitaUusiMatka = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
+    setMatkanNimi('Laskettelumatka');
+    setTilapNimi('Laskettelumatka');
+    setMuokkausKaynnissa(false);
+
+    // TODO: Lisää laskurin nollaus, kun laskuri on rakennettu
+  };
+
   return (
     <div className="home">
-      <h1 className="title">LASKULASKURI</h1>
+      <button className="hampurilaisvalikko" title="Valikko">
+        <SlMenu />
+      </button>
+
+      <h1 className="title">
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+        LASKULASKURI
+        </Link>
+      </h1>
 
       <div style={{ marginBottom: '30px' }}>
         {muokkausKaynnissa ? (
@@ -52,17 +69,18 @@ export default function Laskuri() {
               onClick={() => setMuokkausKaynnissa(true)}
               className="edit-button"
               title="Muokkaa nimeä"
-              >
-         <FaPen style={{ marginLeft: '8px' }} />
-          </button>
+            >
+              <FaPen style={{ marginLeft: '8px' }} />
+            </button>
           </h2>
         )}
       </div>
-      <button className="uusimatka" 
-        
-      >
+
+      {/* Uusi matka -nappi */}
+      <button className="uusimatka" onClick={aloitaUusiMatka}>
         + Uusi matka
       </button>
     </div>
   );
 }
+
