@@ -39,14 +39,25 @@ export default function Home() {
       {state === "ohjeet" && (
         <div className="button-container">
           <p>ohjeet</p>
-          <div onClick={() => {
+          <div
+            onClick={() => {
               setState("napit");
-            }}>X</div>
+            }}
+          >
+            X
+          </div>
         </div>
       )}
       {state === "meistä" && (
         <div className="button-container">
           <p>meistä</p>
+          <div
+            onClick={() => {
+              setState("napit");
+            }}
+          >
+            X
+          </div>
         </div>
       )}
     </section>
