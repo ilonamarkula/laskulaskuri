@@ -6,6 +6,9 @@ import { useState } from "react";
 export default function Home() {
   // napit, ohjeet, meistä
   const [state, setState] = useState("napit");
+  const handleButtonClick = (page) => {
+    setState(page);
+  };
   return (
     <section className="home">
       <h1 className="title">
@@ -20,25 +23,29 @@ export default function Home() {
           </Link>
           <div
             className="home-button"
-            onClick={() => {
-              setState("ohjeet");
-            }}
+            onClick={() => handleButtonClick("ohjeet")}
           >
             Ohjeet
           </div>
           <div
             className="home-button"
-            onClick={() => {
-              setState("meistä");
-            }}
+            onClick={() => handleButtonClick("meistä")}
           >
             Meistä
           </div>
         </div>
       )}
       {state === "ohjeet" && (
-        <div className="button-container">
-          <p>ohjeet</p>
+        <div className="button-container pink">
+          <h2>Käyttöohjeet</h2>
+          <ul>
+            <li>Valitse "Aloita budjetointi"</li>
+            <li>Syötä kulut</li>
+            <li>Lisää omat lisäkulut</li>
+            <li>Muokkaa tai poista kuluja tarvittaessa</li>
+            <li>Seuraa budjettia ja jaa kustannukset kavereiden kesken</li>
+            <li>Näet tuloksen lopuksi</li>
+          </ul>
           <div
             onClick={() => {
               setState("napit");
@@ -49,7 +56,7 @@ export default function Home() {
         </div>
       )}
       {state === "meistä" && (
-        <div className="button-container">
+        <div className="button-container pink">
           <p>meistä</p>
           <div
             onClick={() => {
