@@ -37,15 +37,17 @@ export default function Home() {
       )}
       {state === "ohjeet" && (
         <div className="button-container pink">
-          <h2>Käyttöohjeet</h2>
-          <ul>
-            <li>Valitse "Aloita budjetointi"</li>
-            <li>Syötä kulut</li>
-            <li>Lisää omat lisäkulut</li>
-            <li>Muokkaa tai poista kuluja tarvittaessa</li>
-            <li>Seuraa budjettia ja jaa kustannukset kavereiden kesken</li>
-            <li>Näet tuloksen lopuksi</li>
-          </ul>
+          <div className="inner-box">
+            <h2>Käyttöohjeet</h2>
+            <ul>
+              <li>Valitse "Aloita budjetointi"</li>
+              <li>Syötä kulut</li>
+              <li>Lisää omat lisäkulut</li>
+              <li>Muokkaa tai poista kuluja tarvittaessa</li>
+              <li>Seuraa budjettia ja jaa kustannukset kavereiden kesken</li>
+              <li>Näet tuloksen lopuksi</li>
+            </ul>
+          </div>
           <div
             onClick={() => {
               setState("napit");
@@ -57,7 +59,12 @@ export default function Home() {
       )}
       {state === "meistä" && (
         <div className="button-container pink">
-          <p>meistä</p>
+          <div className="inner-box">
+            <h2>Meistä</h2>
+            <p>Hei!</p>
+            <p>Olemme Mimosa ja Ilona ja teimme tällaisen.</p>
+            <p>Kiitos!</p>
+          </div>
           <div
             onClick={() => {
               setState("napit");
