@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { FaPen } from 'react-icons/fa';
+
+
 
 export default function Laskuri() {
+  const STORAGE_KEY = 'matkanNimi';
+
   const [matkanNimi, setMatkanNimi] = useState('Laskettelumatka');
   const [muokkausKaynnissa, setMuokkausKaynnissa] = useState(false);
   const [tilapNimi, setTilapNimi] = useState(matkanNimi);
 
+  // Lue nimi sessionStoragesta kun komponentti latautuu
+  useEffect(() => {
+    const tallennettu = sessionStorage.getItem(STORAGE_KEY);
+    if (tallennettu) {
+      setMatkanNimi(tallennettu);
+      setTilapNimi(tallennettu);
+    }
+  }, []);
+
   const kasitteleNimenSyotto = (e) => {
     if (e.key === 'Enter') {
-      setMatkanNimi(tilapNimi.trim() || 'Laskettelumatka');
+      const uusi = tilapNimi.trim() || 'Laskettelumatka';
+      setMatkanNimi(uusi);
+      sessionStorage.setItem(STORAGE_KEY, uusi);
       setMuokkausKaynnissa(false);
     } else if (e.key === 'Escape') {
       setTilapNimi(matkanNimi);
@@ -16,55 +32,37 @@ export default function Laskuri() {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div className="home">
       <h1 className="title">LASKULASKURI</h1>
 
       <div style={{ marginBottom: '30px' }}>
         {muokkausKaynnissa ? (
           <input
+            className="trip-name input"
             type="text"
             value={tilapNimi}
             onChange={(e) => setTilapNimi(e.target.value)}
             onKeyDown={kasitteleNimenSyotto}
             autoFocus
-            style={{
-              fontSize: '24px',
-              textAlign: 'center',
-              border: 'none',
-              borderBottom: '2px solid black',
-              outline: 'none',
-              width: '250px',
-            }}
           />
         ) : (
-          <h2
-            style={{
-              display: 'inline-block',
-              borderBottom: '2px solid black',
-              paddingBottom: '4px',
-              marginBottom: '0',
-              fontSize: '24px',
-            }}
-          >
-            {matkanNimi}{' '}
+          <h2 className="trip-name">
+            {matkanNimi}
             <button
               onClick={() => setMuokkausKaynnissa(true)}
-              style={{
-                marginLeft: '8px',
-                cursor: 'pointer',
-                background: 'transparent',
-                border: 'none',
-                fontSize: '18px',
-              }}
+              className="edit-button"
               title="Muokkaa nimeä"
-            >
-              🖉
-            </button>
+              >
+         <FaPen style={{ marginLeft: '8px' }} />
+          </button>
           </h2>
         )}
       </div>
-
-      {/* Loppulaskuri tulee tähän */}
+      <button className="uusimatka" 
+        
+      >
+        + Uusi matka
+      </button>
     </div>
   );
 }

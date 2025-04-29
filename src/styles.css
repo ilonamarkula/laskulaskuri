@@ -139,3 +139,50 @@ body {
   text-align: center;
   padding: 10px 0;
 }
+
+/* Matkan nimi */
+.trip-name {
+  font-size: 1.8rem;
+  font-family: "Andale Mono", monospace;
+  border-bottom: 2px solid black;
+  padding-bottom: 5px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.trip-name input {
+  font-size: 1.8rem;
+  font-family: "Andale Mono", monospace;
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid black;
+  outline: none;
+  width: 250px;
+  padding: 5px;
+}
+
+.edit-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 8px;
+}
+
+.uusimatka {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  background-color: white;
+  color: white;
+  transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid pink;
+  color: black;
+  position: absolute;
+  top: 150px;
+  left: 20px;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
