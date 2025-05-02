@@ -62,11 +62,6 @@ export default function Laskuri() {
   };
 
   const aloitaUusiMatka = () => {
-    /*setCategories(["Liikkuminen", "Ruokailu", "Majoitus", "Laskettelu"]);
-    sessionStorage.removeItem(STORAGE_KEY);
-    setMatkanNimi("Laskettelumatka");
-    setTilapNimi("Laskettelumatka");
-    setMuokkausKaynnissa(false);*/
     window.location.reload();
   };
 
