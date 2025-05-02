@@ -129,38 +129,35 @@ export default function Laskuri() {
       <div className="kulut-boksi">
         <div className="kulut-otsikko">Kulut yht.</div>
         <div className="kulut-summa">{kulutYhteensa} €</div>
-
-        <div className="kulukategoriat">
-          {categories.map((category, i) => (
-            <div key={i} className="category-section">
-              <h3>{category.name}</h3>
-              <ul>
-                {category.expenses.map((expense, j) => (
-                  <li key={j} className="expense-item">
-                    {expense.name}
-                    <input
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      placeholder="€"
-                      value={expense.amount}
-                      onChange={(e) =>
-                        updateExpenseAmount(i, j, e.target.value)
-                      }
-                      className="amount-input"
-                    />
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="add-expense-button"
-                onClick={() => addExpenseToCategory(i)}
-              >
-                + Lisää kulu
-              </button>
-            </div>
-          ))}
-        </div>
+      </div>
+      <div className="kulukategoriat">
+        {categories.map((category, i) => (
+          <div key={i} className="category-section">
+            <h3>{category.name}</h3>
+            <ul>
+              {category.expenses.map((expense, j) => (
+                <li key={j} className="expense-item">
+                  {expense.name}
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="€"
+                    value={expense.amount}
+                    onChange={(e) => updateExpenseAmount(i, j, e.target.value)}
+                    className="amount-input"
+                  />
+                </li>
+              ))}
+            </ul>
+            <button
+              className="add-expense-button"
+              onClick={() => addExpenseToCategory(i)}
+            >
+              + Lisää kulu
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
