@@ -3,13 +3,13 @@ import { FaPen } from 'react-icons/fa';
 import { SlMenu } from 'react-icons/sl';
 import { Link } from 'react-router-dom';
 
-
 export default function Laskuri() {
   const STORAGE_KEY = 'matkanNimi';
 
   const [matkanNimi, setMatkanNimi] = useState('Laskettelumatka');
   const [muokkausKaynnissa, setMuokkausKaynnissa] = useState(false);
   const [tilapNimi, setTilapNimi] = useState(matkanNimi);
+  const [kulutYhteensa, setKulutYhteensa] = useState(0); // Lisätty
 
   useEffect(() => {
     const tallennettu = sessionStorage.getItem(STORAGE_KEY);
@@ -36,8 +36,7 @@ export default function Laskuri() {
     setMatkanNimi('Laskettelumatka');
     setTilapNimi('Laskettelumatka');
     setMuokkausKaynnissa(false);
-
-    // TODO: Lisää laskurin nollaus, kun laskuri on rakennettu
+    setKulutYhteensa(0); // Resetoi kulut myös
   };
 
   return (
@@ -48,7 +47,7 @@ export default function Laskuri() {
 
       <h1 className="title">
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-        LASKULASKURI
+          LASKULASKURI
         </Link>
       </h1>
 
@@ -76,11 +75,15 @@ export default function Laskuri() {
         )}
       </div>
 
-      {/* Uusi matka -nappi */}
       <button className="uusimatka" onClick={aloitaUusiMatka}>
         + Uusi matka
       </button>
+
+      {/* Kulut-boksi */}
+      <div className="kulut-boksi">
+        <div className="kulut-otsikko">Kulut yht.</div>
+        <div className="kulut-summa">{kulutYhteensa} €</div>
+      </div>
     </div>
   );
 }
-

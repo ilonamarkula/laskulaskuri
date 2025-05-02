@@ -272,3 +272,31 @@ body {
   transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+.kulut-boksi {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  border: 2px solid #8ecae6; /* vaaleansininen */
+  padding: 14px 20px;
+  border-radius: 12px; /* hieman pyöristys, mutta ei liikaa */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.kulut-otsikko {
+  font-size: 1.1rem;
+  color: #7fc2e1; /* hieman sinisempää */
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+
+.kulut-summa {
+  font-size: 1.4rem;
+  color: #023047; /* tumma teksti */
+  font-weight: bold;
+}
+
