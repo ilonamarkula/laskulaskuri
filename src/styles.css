@@ -77,6 +77,25 @@ body {
 
 .button-container.pink {
   background-color: pink;
+  position: relative;
+}
+
+.button-container.left-align {
+  align-items: flex-start;
+  padding-left: 170px;
+  padding-right: 60px;
+}
+
+.button-container.pink.left-align {
+  padding: 100px 60px 60px 170px;
+}
+
+.button-container.left-align .inner-box,
+.button-container.left-align .white-box-title {
+  align-self: flex-start;
+  text-align: left;
+  margin-left: 0;
+  margin-top: -10px;
 }
 
 .button-container button {
@@ -92,12 +111,46 @@ body {
 
 .inner-box {
   background-color: white;
-  padding: 40px;
-  border-radius: 12px;
+  padding: 80px;
+  border-radius: 2px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   width: 100%;
   align-self: center;
+}
+
+.white-box-title {
+  font-weight: lighter;
+  background-color: white;
+  padding: 15px;
+  border-radius: 2px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 0px;
+  margin-bottom: 5px;
+  display: inline-block;
+  margin-left: 0;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.white-box-title p {
+  font-size: 1.2rem;
+}
+
+.back-home-button {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 1.5rem;
+  color: rgb(151, 58, 58);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.back-home-button:hover {
+  transform: scale(1.1);
 }
 
 .home-button {
@@ -184,8 +237,8 @@ body {
 }
 
 .uusimatka {
-  font-size: 1rem;           /* pienempi fontti */
-  padding: 6px 16px;         /* vähemmän sisätilaa */
+  font-size: 1rem; /* pienempi fontti */
+  padding: 6px 16px; /* vähemmän sisätilaa */
   cursor: pointer;
   border: none;
   border-radius: 50px;
@@ -201,11 +254,11 @@ body {
 }
 
 .hampurilaisvalikko {
-  display: flex;                
-  align-items: center;         
-  justify-content: center;     
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.4rem;
-  width: 48px;                 
+  width: 48px;
   height: 48px;
   cursor: pointer;
   border: 2px solid pink;

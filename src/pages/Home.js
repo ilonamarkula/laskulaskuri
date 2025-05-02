@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SlClose } from "react-icons/sl";
 import laskutyyppiImage from "../laskutyyppi_transparent.png";
 import Vuoret from "../mountains_transparent.png";
 import { useState } from "react";
@@ -6,9 +7,8 @@ import { useState } from "react";
 export default function Home() {
   // napit, ohjeet, meistä
   const [state, setState] = useState("napit");
-  const handleButtonClick = (page) => {
-    setState(page);
-  };
+  const handleButtonClick = (page) => setState(page);
+
   return (
     <section className="home">
       <h1 className="title">
@@ -16,6 +16,7 @@ export default function Home() {
         <img src={laskutyyppiImage} alt="Laskutyyppi" className="title-image" />
         <img src={Vuoret} alt="Vuoret" className="title-image2" />
       </h1>
+
       {state === "napit" && (
         <div className="button-container">
           <Link to="/laskuri" className="home-button">
@@ -35,42 +36,50 @@ export default function Home() {
           </div>
         </div>
       )}
+
       {state === "ohjeet" && (
-        <div className="button-container pink">
-          <div className="inner-box">
-            <h2>Käyttöohjeet</h2>
-            <ul>
-              <li>Valitse "Aloita budjetointi"</li>
-              <li>Syötä kulut</li>
-              <li>Lisää omat lisäkulut</li>
-              <li>Muokkaa tai poista kuluja tarvittaessa</li>
-              <li>Seuraa budjettia ja jaa kustannukset kavereiden kesken</li>
-              <li>Näet tuloksen lopuksi</li>
-            </ul>
-          </div>
-          <div
-            onClick={() => {
-              setState("napit");
-            }}
+        <div className="button-container pink left-align">
+          <Link
+            to="/"
+            className="back-home-button"
+            onClick={() => setState("napit")}
           >
-            X
+            <SlClose size={30} />
+          </Link>
+
+          <div className="white-box-title">
+            <p>Käyttöohjeet</p>
+          </div>
+          <div className="inner-box">
+            <li>Valitse "Aloita budjetointi"</li>
+            <li>Syötä kulut</li>
+            <li>Lisää omat lisäkulut</li>
+            <li>Muokkaa tai poista kuluja tarvittaessa</li>
+            <li>Seuraa budjettia ja jaa kustannukset kavereiden kesken</li>
+            <li>Näet tuloksen lopuksi</li>
           </div>
         </div>
       )}
+
       {state === "meistä" && (
-        <div className="button-container pink">
-          <div className="inner-box">
-            <h2>Meistä</h2>
-            <p>Hei!</p>
-            <p>Olemme Mimosa ja Ilona ja teimme tällaisen.</p>
-            <p>Kiitos!</p>
-          </div>
-          <div
-            onClick={() => {
-              setState("napit");
-            }}
+        <div className="button-container pink left-align">
+          <Link
+            to="/"
+            className="back-home-button"
+            onClick={() => setState("napit")}
           >
-            X
+            <SlClose size={30} />
+          </Link>
+
+          <div className="white-box-title">
+            <p>Meistä</p>
+          </div>
+          <div className="inner-box">
+            <p>Hei!</p>
+            <br />
+            <p>Olemme Mimosa ja Ilona ja teimme tällaisen.</p>
+            <br />
+            <p>Kiitos!</p>
           </div>
         </div>
       )}
