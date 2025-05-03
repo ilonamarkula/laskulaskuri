@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa";
-import { SlMenu } from "react-icons/sl";
+import { SlMenu, SlClose } from "react-icons/sl";
 import { Link } from "react-router-dom";
 
 export default function Laskuri() {
@@ -9,9 +9,9 @@ export default function Laskuri() {
   const [matkanNimi, setMatkanNimi] = useState("Laskettelumatka");
   const [muokkausKaynnissa, setMuokkausKaynnissa] = useState(false);
   const [tilapNimi, setTilapNimi] = useState(matkanNimi);
-  const [kulutYhteensa, setKulutYhteensa] = useState(0); // Lisätty
+  const [kulutYhteensa, setKulutYhteensa] = useState(0);
+  const [valikkoAuki, setValikkoAuki] = useState(false);
 
-  const [newCategory, setNewCategory] = useState("");
   const [categories, setCategories] = useState([
     {
       name: "Liikkuminen",
@@ -49,6 +49,19 @@ export default function Laskuri() {
     }
   }, []);
 
+  useEffect(() => {
+    const total = categories.reduce((sum, category) => {
+      return (
+        sum +
+        category.expenses.reduce(
+          (catSum, expense) => catSum + parseFloat(expense.amount || 0),
+          0
+        )
+      );
+    }, 0);
+    setKulutYhteensa(total.toFixed(2));
+  }, [categories]);
+
   const kasitteleNimenSyotto = (e) => {
     if (e.key === "Enter") {
       const uusi = tilapNimi.trim() || "Laskettelumatka";
@@ -62,7 +75,39 @@ export default function Laskuri() {
   };
 
   const aloitaUusiMatka = () => {
-    window.location.reload();
+    sessionStorage.removeItem(STORAGE_KEY);
+    setMatkanNimi("Laskettelumatka");
+    setTilapNimi("Laskettelumatka");
+    setMuokkausKaynnissa(false);
+    setKulutYhteensa(0);
+    setCategories([
+      {
+        name: "Liikkuminen",
+        expenses: [
+          { name: "Menomatka", amount: "" },
+          { name: "Paluumatka", amount: "" },
+        ],
+      },
+      {
+        name: "Ruokailu",
+        expenses: [
+          { name: "Ravintolat", amount: "" },
+          { name: "Omat eväät", amount: "" },
+        ],
+      },
+      {
+        name: "Majoitus",
+        expenses: [{ name: "Hotelli", amount: "" }],
+      },
+      {
+        name: "Laskettelu",
+        expenses: [
+          { name: "Hissiliput", amount: "" },
+          { name: "Välinevuokra", amount: "" },
+          { name: "Hiihtokoulu", amount: "" },
+        ],
+      },
+    ]);
   };
 
   const addExpenseToCategory = (index) => {
@@ -82,9 +127,21 @@ export default function Laskuri() {
 
   return (
     <div className="home">
-      <button className="hampurilaisvalikko" title="Valikko">
-        <SlMenu />
+      <button
+        className="hampurilaisvalikko"
+        title="Valikko"
+        onClick={() => setValikkoAuki(!valikkoAuki)}
+      >
+        {valikkoAuki ? <SlClose /> : <SlMenu />}
       </button>
+
+      {valikkoAuki && (
+        <div className="valikko-laatikko slide-in">
+          <Link to="/" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Etusivu</Link>
+          <Link to="/ohjeet" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Ohjeet</Link>
+          <Link to="/meista" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Meistä</Link>
+        </div>
+      )}
 
       <h1 className="title">
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
@@ -120,11 +177,11 @@ export default function Laskuri() {
         + Uusi matka
       </button>
 
-      {/* Kulut-boksi */}
       <div className="kulut-boksi">
         <div className="kulut-otsikko">Kulut yht.</div>
         <div className="kulut-summa">{kulutYhteensa} €</div>
       </div>
+
       <div className="kulukategoriat">
         {categories.map((category, i) => (
           <div key={i} className="category-section">
@@ -139,7 +196,9 @@ export default function Laskuri() {
                     step="0.01"
                     placeholder="€"
                     value={expense.amount}
-                    onChange={(e) => updateExpenseAmount(i, j, e.target.value)}
+                    onChange={(e) =>
+                      updateExpenseAmount(i, j, e.target.value)
+                    }
                     className="amount-input"
                   />
                 </li>
