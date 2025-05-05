@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaPen } from "react-icons/fa";
 import { SlMenu, SlClose } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
 
 export default function Laskuri() {
-  const STORAGE_KEY = "matkanNimi";
+  const STORAGE_KEY = "matkaData";
 
+  const [loaded, setLoaded] = useState(false);
   const [matkanNimi, setMatkanNimi] = useState("Laskettelumatka");
   const [muokkausKaynnissa, setMuokkausKaynnissa] = useState(false);
   const [tilapNimi, setTilapNimi] = useState(matkanNimi);
@@ -42,32 +43,48 @@ export default function Laskuri() {
     },
   ]);
 
+  // Ladataan nykyisen matkan nimi ja kulut localStoragesta, jos olemassa
   useEffect(() => {
-    const tallennettu = sessionStorage.getItem(STORAGE_KEY);
-    if (tallennettu) {
-      setMatkanNimi(tallennettu);
-      setTilapNimi(tallennettu);
+    const matkaData = localStorage.getItem(STORAGE_KEY);
+    console.log("tallennettu", matkaData);
+    setLoaded(true);
+    if (matkaData !== null) {
+      const data = JSON.parse(matkaData);
+      setMatkanNimi(data.matkanNimi);
+      setTilapNimi(data.matkanNimi);
+      setCategories(data.categories);
     }
   }, []);
 
+  const isFirstRender = useRef(true);
+
+  // Tallennetaan tiedot localStorageen aina, kun matkan nimi tai kategoriat muuttuvat
+  useEffect(() => {
+    if (isFirstRender.current === true) {
+      isFirstRender.current = false;
+      return;
+    }
+    const matkaData = { matkanNimi, categories };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(matkaData));
+  }, [matkanNimi, categories]);
+
+  // Päivitetään kokonaiskulut
   useEffect(() => {
     const total = categories.reduce((sum, category) => {
       return (
         sum +
-        category.expenses.reduce(
-          (catSum, expense) => catSum + parseFloat(expense.amount || 0),
-          0
-        )
+        category.expenses.reduce((categorySum, expense) => {
+          return categorySum + (parseFloat(expense.amount) || 0);
+        }, 0)
       );
     }, 0);
-    setKulutYhteensa(total.toFixed(2));
+    setKulutYhteensa(total);
   }, [categories]);
 
   const kasitteleNimenSyotto = (e) => {
     if (e.key === "Enter") {
       const uusi = tilapNimi.trim() || "Laskettelumatka";
       setMatkanNimi(uusi);
-      sessionStorage.setItem(STORAGE_KEY, uusi);
       setMuokkausKaynnissa(false);
     } else if (e.key === "Escape") {
       setTilapNimi(matkanNimi);
@@ -76,7 +93,7 @@ export default function Laskuri() {
   };
 
   const aloitaUusiMatka = () => {
-    sessionStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_KEY);
     setMatkanNimi("Laskettelumatka");
     setTilapNimi("Laskettelumatka");
     setMuokkausKaynnissa(false);
@@ -111,6 +128,7 @@ export default function Laskuri() {
     ]);
   };
 
+  // Käyttäjä lisää haluamansa uuden kulun
   const addExpenseToCategory = (index) => {
     const expenseName = prompt("Anna kulun nimi:");
     if (expenseName && expenseName.trim() !== "") {
@@ -120,11 +138,14 @@ export default function Laskuri() {
     }
   };
 
+  // Päivitetään yksittäisen kulun summa
   const updateExpenseAmount = (categoryIndex, expenseIndex, value) => {
     const updated = [...categories];
     updated[categoryIndex].expenses[expenseIndex].amount = value;
     setCategories(updated);
   };
+
+  if (loaded === false) return null;
 
   return (
     <div className="home">
@@ -138,9 +159,27 @@ export default function Laskuri() {
 
       {valikkoAuki && (
         <div className="valikko-laatikko slide-in">
-          <Link to="/" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Etusivu</Link>
-          <Link to="/ohjeet" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Ohjeet</Link>
-          <Link to="/meista" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Meistä</Link>
+          <Link
+            to="/"
+            className="valikko-linkki"
+            onClick={() => setValikkoAuki(false)}
+          >
+            Etusivu
+          </Link>
+          <Link
+            to="/ohjeet"
+            className="valikko-linkki"
+            onClick={() => setValikkoAuki(false)}
+          >
+            Ohjeet
+          </Link>
+          <Link
+            to="/meista"
+            className="valikko-linkki"
+            onClick={() => setValikkoAuki(false)}
+          >
+            Meistä
+          </Link>
         </div>
       )}
 
@@ -194,12 +233,10 @@ export default function Laskuri() {
                   <input
                     type="number"
                     min="0"
-                    step="0.01"
+                    step="10"
                     placeholder="€"
                     value={expense.amount}
-                    onChange={(e) =>
-                      updateExpenseAmount(i, j, e.target.value)
-                    }
+                    onChange={(e) => updateExpenseAmount(i, j, e.target.value)}
                     className="amount-input"
                   />
                 </li>
