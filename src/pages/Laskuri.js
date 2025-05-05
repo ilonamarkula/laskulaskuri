@@ -3,6 +3,7 @@ import { FaPen } from "react-icons/fa";
 import { SlMenu, SlClose } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";  // Lisää nämä importit
 
 export default function Laskuri() {
   const STORAGE_KEY = "matkaData";
@@ -13,6 +14,7 @@ export default function Laskuri() {
   const [tilapNimi, setTilapNimi] = useState(matkanNimi);
   const [kulutYhteensa, setKulutYhteensa] = useState(0);
   const [valikkoAuki, setValikkoAuki] = useState(false);
+  const [dropdownAuki, setDropdownAuki] = useState(false); // Dropdown state for save options
 
   const [categories, setCategories] = useState([
     {
@@ -145,6 +147,12 @@ export default function Laskuri() {
     setCategories(updated);
   };
 
+  const saveAsFile = (fileType) => {
+    // Placeholder function for handling save actions.
+    alert(`${fileType} valittu!`);
+    setDropdownAuki(false); // Close the dropdown after selection
+  };
+
   if (loaded === false) return null;
 
   return (
@@ -188,6 +196,24 @@ export default function Laskuri() {
           LASKULASKURI
         </Link>
       </h1>
+
+      <div className="dropdown-wrapper">
+        <button
+          className="save-budget-button"
+          onClick={() => setDropdownAuki(!dropdownAuki)}
+        >
+          Tallenna budjetti
+          {dropdownAuki ? <IoMdArrowDropup /> : <IoMdArrowDropdown />} {/* Vaihtaa ikonin */}
+        </button>
+
+        {dropdownAuki && (
+          <ul className="save-dropdown-menu">
+            <li onClick={() => saveAsFile("PDF")}>PDF</li>
+            <li onClick={() => saveAsFile("JPEG")}>JPEG</li>
+            <li onClick={() => saveAsFile("TXT")}>TXT</li>
+          </ul>
+        )}
+      </div>
 
       <div style={{ marginBottom: "30px" }}>
         {muokkausKaynnissa ? (
