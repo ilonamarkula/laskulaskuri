@@ -20,7 +20,7 @@ export default function Home() {
       {state === "napit" && (
         <div className="button-container">
           <Link to="/laskuri" className="home-button">
-            Aloita budjetointi
+            Budjetointiin
           </Link>
           <div
             className="home-button"

@@ -259,7 +259,7 @@ export default function Laskuri() {
                   <input
                     type="number"
                     min="0"
-                    step="10"
+                    step="5"
                     placeholder="€"
                     value={expense.amount}
                     onChange={(e) => updateExpenseAmount(i, j, e.target.value)}
