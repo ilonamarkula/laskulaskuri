@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa";
 import { SlMenu, SlClose } from "react-icons/sl";
 import { Link } from "react-router-dom";
+import { RiCloseLargeLine } from "react-icons/ri";
 
 export default function Laskuri() {
   const STORAGE_KEY = "matkanNimi";
@@ -132,7 +133,7 @@ export default function Laskuri() {
         title="Valikko"
         onClick={() => setValikkoAuki(!valikkoAuki)}
       >
-        {valikkoAuki ? <SlClose /> : <SlMenu />}
+        {valikkoAuki ? <RiCloseLargeLine /> : <SlMenu />}
       </button>
 
       {valikkoAuki && (

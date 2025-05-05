@@ -75,6 +75,13 @@ body {
   z-index: 10;
 }
 
+.button-container.no-border {
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+
+}
+
 .button-container.pink {
   background-color: pink;
   position: relative;
@@ -237,21 +244,22 @@ body {
 }
 
 .uusimatka {
-  font-size: 1rem; /* pienempi fontti */
-  padding: 6px 16px; /* vähemmän sisätilaa */
+  font-size: 1rem;
+  padding: 10px 12px;
   cursor: pointer;
   border: none;
-  border-radius: 50px;
+  border-radius: 12px;
   background-color: white;
   color: black;
   transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
   border: 2px solid pink;
   position: absolute;
-  top: 150px;
-  left: 20px;
+  top: 150px;   
+  left: 20px;   
   z-index: 10;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 
 .hampurilaisvalikko {
   display: flex;
@@ -262,7 +270,7 @@ body {
   height: 48px;
   cursor: pointer;
   border: 2px solid pink;
-  border-radius: 50%;
+  border-radius: 12px; /* Muutettu: pyöreä mutta ei ympyrä */
   background-color: white;
   color: black;
   position: absolute;
@@ -402,4 +410,63 @@ right: 20px;
 
 .valikko-linkki:hover {
   color: #219ebc;
+}
+
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.white-box-title {
+  font-weight: lighter;
+  background-color: white;
+  padding: 15px;
+  border-radius: 2px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 0px;
+  margin-bottom: 5px;
+  display: inline-block;
+  margin-left: 0;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.inner-box {
+  background-color: white;
+  padding: 80px;
+  border-radius: 2px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  align-self: center;
+}
+
+
+.back-home-button {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  font-size: 1.5rem;
+  color: black;
+  background: none;
+  border: none;
+  z-index: 999;
+  cursor: pointer;
+  transition: none; /* Ei skaalausta tms. */
+}
+
+/* Poista hover-efekti */
+.back-home-button:hover {
+  transform: none;
+}
+
+.about-section {
+  background-color: pink;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
