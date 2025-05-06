@@ -514,3 +514,63 @@ right: 20px;
 .dropdown-menu li:hover {
   background-color: #f0f0f0;
 }
+
+.kulunlisays-nappi {
+  font-size: 1rem;
+  padding: 10px 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid pink;
+  position: absolute;
+  top: 150px;
+  left: 90px; /* voit säätää sijaintia tarvittaessa */
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.kulunlisays-nappi:hover {
+  background-color: #ffe6ec;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.kulunlisays-laatikko {
+  position: absolute;
+  top: 220px;
+  left: 20px;
+  background-color: white;
+  border: 2px solid #ffafcc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  animation: slideIn 0.3s ease forwards;
+  width: 300px;
+}
+
+.kulunlisays-laatikko input,
+.kulunlisays-laatikko select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.kulunlisays-laatikko button {
+  width: 100%;
+  padding: 10px;
+  background-color: pink;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.kulunlisays-laatikko button:hover {
+  background-color: #ff9ebf;
+}
