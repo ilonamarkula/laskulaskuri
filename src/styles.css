@@ -458,6 +458,18 @@ right: 20px;
   transition: none; /* Ei skaalausta tms. */
 }
 
+.back-home-raksi {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 1.5rem;
+  color: black;
+  background: none;
+  border: none;
+  z-index: 999;
+  cursor: pointer;
+  transition: none; /* Ei skaalausta tms. */
+}
 /* Poista hover-efekti */
 .back-home-button:hover {
   transform: none;

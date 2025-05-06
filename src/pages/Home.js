@@ -41,7 +41,7 @@ export default function Home() {
         <div className="button-container pink left-align">
           <Link
             to="/"
-            className="back-home-button"
+            className="back-home-raksi"
             onClick={() => setState("napit")}
           >
             <SlClose size={30} />
@@ -65,7 +65,7 @@ export default function Home() {
         <div className="button-container pink left-align">
           <Link
             to="/"
-            className="back-home-button"
+            className="back-home-raksi"
             onClick={() => setState("napit")}
           >
             <SlClose size={30} />
