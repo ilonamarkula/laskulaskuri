@@ -238,13 +238,6 @@ export default function Laskuri() {
         <button
           className="save-budget-button"
           onClick={() => setDropdownAuki(!dropdownAuki)}
-        ></button>
-        Tallenna budjetti
-        {dropdownAuki ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}{" "}
-        {/* Vaihtaa ikonin */}
-        <button
-          className="save-budget-button"
-          onClick={() => setDropdownAuki(!dropdownAuki)}
         >
           Tallenna budjetti{" "}
           {dropdownAuki ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
