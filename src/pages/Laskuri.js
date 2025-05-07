@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FaPen, FaInfoCircle } from "react-icons/fa";
+import { FaPen} from "react-icons/fa";
 import { SlMenu } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
@@ -28,6 +28,14 @@ export default function Laskuri() {
     Laskettelu:
       "Hissiliput ja välinevuokra voivat haukata ison osan budjetista. Vertaile keskusten hintoja ja etsi etukäteistarjouksia!",
   };
+
+  const categoryTitles = {
+    Ruokailu: "Ruokailu laskettelemassa",
+    Majoitus: "Majoittuminen kohteessa",
+    Liikkuminen: "Liikkuminen",
+    Laskettelu: "Ota huomioon laskettelussa",
+  };
+  
 
   const [categories, setCategories] = useState([
     {
@@ -58,10 +66,15 @@ export default function Laskuri() {
     },
   ]);
 
+  const [vinkinOtsikko, setVinkinOtsikko] = useState("");
+
   const avaaVinkki = (kategoriannimi) => {
     setAktiivinenVinkki(categoryTips[kategoriannimi]);
+    setVinkinOtsikko(categoryTitles[kategoriannimi] || kategoriannimi);
     setNaytaVinkki(true);
   };
+  
+
 
   const isFirstRender = useRef(true);
 
@@ -330,15 +343,18 @@ export default function Laskuri() {
             </button>
           </div>
         ))}
-      </div>      
+      </div>           
       { naytaVinkki && (
         <div className="vinkkipopup" onClick={() => setNaytaVinkki(false)}>
           <div
             className="vinkkipopup-laatikko"
             onClick={(e) => e.stopPropagation()}
           >
+            <h3 className="vinkkipopup-otsikko">{vinkinOtsikko}</h3>
             <p className="vinkkiteksti">{aktiivinenVinkki}</p>
-            <button onClick={() => setNaytaVinkki(false)}>Sulje</button>
+            <div style={{ marginTop: "1rem", textAlign: "right" }}>
+              <button onClick={() => setNaytaVinkki(false)}>Sulje</button>
+            </div>
           </div>
         </div>
       )}
