@@ -4,7 +4,7 @@ import { SlMenu } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
-import { CiCircleInfo } from "react-icons/ci";
+import { GoQuestion } from "react-icons/go";
 
 export default function Laskuri() {
   const STORAGE_KEY = "matkaData";
@@ -228,7 +228,8 @@ export default function Laskuri() {
                 title="Näytä vinkki"
                 style={{ background: "none", border: "none", cursor: "pointer", color: "#555" }}
               >
-                <CiCircleInfo  />
+                <GoQuestion />
+
               </button>
             </h3>
             <ul>
