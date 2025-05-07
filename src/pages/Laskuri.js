@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { FaPen} from "react-icons/fa";
+import { FaPen } from "react-icons/fa";
 import { SlMenu } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { GoQuestion } from "react-icons/go";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 export default function Laskuri() {
   const STORAGE_KEY = "matkaData";
   const [loaded, setLoaded] = useState(false);
@@ -34,7 +37,6 @@ export default function Laskuri() {
     Liikkuminen: "Liikkuminen",
     Laskettelu: "Ota huomioon laskettelussa",
   };
-  
 
   const [categories, setCategories] = useState([
     {
@@ -72,8 +74,6 @@ export default function Laskuri() {
     setVinkinOtsikko(categoryTitles[kategoriannimi] || kategoriannimi);
     setNaytaVinkki(true);
   };
-  
-
 
   const isFirstRender = useRef(true);
 
@@ -393,9 +393,8 @@ export default function Laskuri() {
             </button>
           </div>
         ))}
-  
-      </div>           
-      { naytaVinkki && (
+      </div>
+      {naytaVinkki && (
         <div className="vinkkipopup" onClick={() => setNaytaVinkki(false)}>
           <div
             className="vinkkipopup-laatikko"
