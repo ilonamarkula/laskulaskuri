@@ -393,8 +393,6 @@ export default function Laskuri() {
             </button>
           </div>
         ))}
-      </div>
-      {naytaVinkki && (
       </div>           
       { naytaVinkki && (
         <div className="vinkkipopup" onClick={() => setNaytaVinkki(false)}>
