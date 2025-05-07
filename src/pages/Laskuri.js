@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { GoQuestion } from "react-icons/go";
-
 export default function Laskuri() {
   const STORAGE_KEY = "matkaData";
   const [loaded, setLoaded] = useState(false);
@@ -146,34 +145,70 @@ export default function Laskuri() {
   };
 
   const addExpenseToCategory = (index) => {
-    const expenseName = prompt("Anna kulun nimi:");
-    if (expenseName?.trim()) {
-      const updated = [...categories];
-      updated[index].expenses.push({ name: expenseName.trim(), amount: "" });
-      setCategories(updated);
+    const updatedCategories = [...categories];
+    updatedCategories[index].expenses.push({
+      name: "",
+      amount: "",
+      isEditing: true,
+    });
+    setCategories(updatedCategories);
+  };
+
+  const handleExpenseNameChange = (categoryIndex, expenseIndex, value) => {
+    const updated = [...categories];
+    updated[categoryIndex].expenses[expenseIndex].name = value;
+    setCategories(updated);
+  };
+
+  const handleExpenseAmountChange = (categoryIndex, expenseIndex, value) => {
+    const updated = [...categories];
+    updated[categoryIndex].expenses[expenseIndex].amount = value;
+    setCategories(updated);
+  };
+
+  const toggleExpenseEdit = (categoryIndex, expenseIndex, editing) => {
+    const updated = [...categories];
+    updated[categoryIndex].expenses[expenseIndex].isEditing = editing;
+    setCategories(updated);
+  };
+
+  const handleExpenseNameBlur = (categoryIndex, expenseIndex) => {
+    const expense = categories[categoryIndex].expenses[expenseIndex];
+    if (expense.name.trim() === "") {
+      expense.name = "Uusi kulu";
+    }
+    toggleExpenseEdit(categoryIndex, expenseIndex, false);
+  };
+
+  const handleExpenseNameKeyDown = (e, categoryIndex, expenseIndex) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleExpenseNameBlur(categoryIndex, expenseIndex);
     }
   };
 
   // Päivitetään yksittäisen kulun summa
   const updateExpenseAmount = (categoryIndex, expenseIndex, value, event) => {
-    const updated = [...categories];
-    updated[categoryIndex].expenses[expenseIndex].amount = value;
-    setCategories(updated);
+    handleExpenseAmountChange(categoryIndex, expenseIndex, value);
 
     if (event.key === "Enter") {
       let nextCategoryIndex = categoryIndex;
       let nextExpenseIndex = expenseIndex + 1;
 
+      const updatedCategories = [...categories];
+
       // Jos kululista loppuu, siirrytään seuraavaan kategoriaan
-      if (nextExpenseIndex >= updated[categoryIndex].expenses.length) {
+      if (
+        nextExpenseIndex >= updatedCategories[categoryIndex].expenses.length
+      ) {
         nextCategoryIndex = categoryIndex + 1;
         nextExpenseIndex = 0; // Aloita seuraavasta kategoriasta ensimmäinen kulu
       }
 
       // Tarkista että seuraava kategoria on olemassa
       if (
-        updated[nextCategoryIndex] &&
-        updated[nextCategoryIndex].expenses[nextExpenseIndex]
+        updatedCategories[nextCategoryIndex] &&
+        updatedCategories[nextCategoryIndex].expenses[nextExpenseIndex]
       ) {
         const nextExpenseElement = document.getElementById(
           `expense-input-${nextCategoryIndex}-${nextExpenseIndex}`
@@ -229,9 +264,7 @@ export default function Laskuri() {
       )}
 
       <h1 className="title">
-        <Link to="/" >
-          LASKULASKURI
-        </Link>
+        <Link to="/">LASKULASKURI</Link>
       </h1>
 
       <div className="dropdown-wrapper">
@@ -252,7 +285,6 @@ export default function Laskuri() {
       </div>
 
       <div className="trip-name-wrapper">
-
         {muokkausKaynnissa ? (
           <input
             className="trip-name input"
@@ -291,19 +323,37 @@ export default function Laskuri() {
             <h3 style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               {category.name}
               <button
-               className="info-button vinkki-nappi" 
+                className="info-button vinkki-nappi"
                 onClick={() => avaaVinkki(category.name)}
                 title="Näytä vinkki"
-                
               >
                 <GoQuestion />
-
               </button>
             </h3>
             <ul>
               {category.expenses.map((expense, j) => (
                 <li key={j} className="expense-item">
-                  {expense.name}
+                  {expense.isEditing ? (
+                    <input
+                      type="text"
+                      value={expense.name}
+                      onChange={(e) =>
+                        handleExpenseNameChange(i, j, e.target.value)
+                      }
+                      onBlur={() => handleExpenseNameBlur(i, j)}
+                      onKeyDown={(e) => handleExpenseNameKeyDown(e, i, j)}
+                      className="expense-name-input"
+                      autoFocus
+                    />
+                  ) : (
+                    <span
+                      className="expense-name-text"
+                      onClick={() => toggleExpenseEdit(i, j, true)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {expense.name}
+                    </span>
+                  )}
                   <input
                     type="number"
                     min="0"
@@ -330,8 +380,8 @@ export default function Laskuri() {
             </button>
           </div>
         ))}
-      </div>      
-      { naytaVinkki && (
+      </div>
+      {naytaVinkki && (
         <div className="vinkkipopup" onClick={() => setNaytaVinkki(false)}>
           <div
             className="vinkkipopup-laatikko"
@@ -342,6 +392,6 @@ export default function Laskuri() {
           </div>
         </div>
       )}
-    </div> 
+    </div>
   );
 }
