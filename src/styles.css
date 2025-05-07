@@ -1,4 +1,3 @@
-/* Reset & Base styles */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +10,6 @@ body {
   color: #333;
 }
 
-/* Layout */
 .app {
   display: flex;
   flex-direction: column;
@@ -26,10 +24,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Sisältö alkaa ylhäältä */
+  justify-content: flex-start;
   min-height: 100vh;
   background-color: white;
-  position: relative; /* Lisätty, jotta kuva voi olla suhteessa home-elemnttiin */
+  position: relative;
 }
 
 .title {
@@ -40,7 +38,7 @@ body {
   text-align: center;
   margin-top: 60px;
   margin-bottom: 40px;
-  position: relative; /* Lisätty, jotta kuva voidaan sijoittaa päälle */
+  position: relative;
 }
 
 .title-image {
@@ -169,30 +167,28 @@ body {
   background-color: white;
   color: black;
   text-align: center;
-  text-decoration: none; /* poistaa linkkiviivan */
+  text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
   position: relative;
-  z-index: 1; /* Varmistaa, että napin varjot näkyvät oikein */
+  z-index: 1;
   box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3),
-    /* Ulompi varjo */ -4px -4px 8px rgba(255, 255, 255, 0.5); /* Sisempi heikompi varjo */
+    -4px -4px 8px rgba(255, 255, 255, 0.5);
 }
 
-/* Hover-tilan tyylit */
 .home-button:hover {
-  background-color: white; /* Pidetään tausta valkoisena hoverissa */
-  transform: translateY(-8px) translateX(8px); /* Nosto ja siirto oikealle ylös */
+  background-color: white;
+  transform: translateY(-8px) translateX(8px);
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4),
-    /* Syvempi varjo hover-tilassa */ -5px -5px 10px rgba(255, 255, 255, 0.6); /* Kirkastunut varjo hoverissa */
-  border: 4px solid pink; /* Pinkki ulompi reuna */
-  outline: 3px solid pink; /* Pinkki sisempi ääriviiva */
+    -5px -5px 10px rgba(255, 255, 255, 0.6);
+  border: 4px solid pink;
+  outline: 3px solid pink;
 }
 
-/* Active-tilan tyylit */
 .home-button:active {
-  transform: translateY(6px) translateX(6px); /* Napin liike alas (painuu alas) */
+  transform: translateY(6px) translateX(6px);
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5),
-    -2px -2px 4px rgba(255, 255, 255, 0.7); /* Vahvempi varjo painettaessa */
-  outline: 2px solid pink; /* Sisempi ääriviiva aktivoidessa */
+    -2px -2px 4px rgba(255, 255, 255, 0.7);
+  outline: 2px solid pink;
 }
 
 .nav a {
@@ -205,7 +201,6 @@ body {
   text-decoration: underline;
 }
 
-/* Footer */
 .footer {
   background-color: #eee;
   color: #555;
@@ -213,7 +208,6 @@ body {
   padding: 10px 0;
 }
 
-/* Matkan nimi */
 .trip-name {
   font-size: 1.8rem;
   font-family: "Andale Mono", monospace;
@@ -268,7 +262,7 @@ body {
   height: 48px;
   cursor: pointer;
   border: 2px solid pink;
-  border-radius: 12px; /* Muutettu: pyöreä mutta ei ympyrä */
+  border-radius: 12px;
   background-color: white;
   color: black;
   position: absolute;
@@ -284,9 +278,9 @@ body {
   bottom: 20px;
   right: 20px;
   background-color: white;
-  border: 2px solid #8ecae6; /* vaaleansininen */
+  border: 2px solid #8ecae6;
   padding: 14px 20px;
-  border-radius: 12px; /* hieman pyöristys, mutta ei liikaa */
+  border-radius: 12px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-family: sans-serif;
@@ -294,14 +288,14 @@ body {
 
 .kulut-otsikko {
   font-size: 1.1rem;
-  color: #7fc2e1; /* hieman sinisempää */
+  color: #7fc2e1;
   margin-bottom: 4px;
   font-weight: 600;
 }
 
 .kulut-summa {
   font-size: 1.4rem;
-  color: #023047; /* tumma teksti */
+  color: #023047;
   font-weight: bold;
 }
 
@@ -452,7 +446,7 @@ body {
   border: none;
   z-index: 999;
   cursor: pointer;
-  transition: none; /* Ei skaalausta tms. */
+  transition: none;
 }
 
 .back-home-raksi {
@@ -465,8 +459,10 @@ body {
   border: none;
   z-index: 999;
   cursor: pointer;
+  transition: none;
   transition: none; 
 }
+
 
 .back-home-button:hover {
   transform: none;
@@ -525,6 +521,7 @@ body {
   position: absolute;
   top: 150px;
   left: 90px; 
+  left: 90px;
   z-index: 10;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -636,4 +633,42 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+}
+
+.vinkkipopup-laatikko {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-expense-button {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-expense-button:hover {
+  background-color: #f0f8ff;
+  transform: scale(1.05);
+}
+
+.expense-name-input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  padding: 2px 2px;
+  width: 50%;
 }
