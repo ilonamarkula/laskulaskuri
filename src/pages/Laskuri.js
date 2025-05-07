@@ -229,7 +229,7 @@ export default function Laskuri() {
       )}
 
       <h1 className="title">
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/" >
           LASKULASKURI
         </Link>
       </h1>
@@ -251,7 +251,8 @@ export default function Laskuri() {
         )}
       </div>
 
-      <div style={{ marginBottom: "30px" }}>
+      <div className="trip-name-wrapper">
+
         {muokkausKaynnissa ? (
           <input
             className="trip-name input"
@@ -290,15 +291,10 @@ export default function Laskuri() {
             <h3 style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               {category.name}
               <button
-                className="info-button"
+               className="info-button vinkki-nappi" 
                 onClick={() => avaaVinkki(category.name)}
                 title="Näytä vinkki"
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  color: "#555",
-                }}
+                
               >
                 <GoQuestion />
 
@@ -334,41 +330,18 @@ export default function Laskuri() {
             </button>
           </div>
         ))}
-      </div>
-
-      {naytaVinkki && (
-        <div
-          className="vinkkipopup"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999,
-          }}
-          onClick={() => setNaytaVinkki(false)}
-        >
+      </div>      
+      { naytaVinkki && (
+        <div className="vinkkipopup" onClick={() => setNaytaVinkki(false)}>
           <div
-            style={{
-              background: "white",
-              padding: "20px",
-              borderRadius: "12px",
-              maxWidth: "400px",
-              textAlign: "center",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-            }}
+            className="vinkkipopup-laatikko"
             onClick={(e) => e.stopPropagation()}
           >
-            <p style={{ marginBottom: "15px" }}>{aktiivinenVinkki}</p>
+            <p className="vinkkiteksti">{aktiivinenVinkki}</p>
             <button onClick={() => setNaytaVinkki(false)}>Sulje</button>
           </div>
         </div>
       )}
-    </div>
+    </div> 
   );
 }

@@ -571,3 +571,41 @@ body {
 .kulunlisays-laatikko button:hover {
   background-color: #ff9ebf;
 }
+
+.title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.trip-name-wrapper {
+  margin-bottom: 30px;
+}
+
+.vinkki-nappi {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+}
+
+.vinkkipopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.vinkkipopup-laatikko {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
