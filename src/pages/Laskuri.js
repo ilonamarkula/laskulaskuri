@@ -19,10 +19,14 @@ export default function Laskuri() {
   const [aktiivinenVinkki, setAktiivinenVinkki] = useState("");
 
   const categoryTips = {
-    Liikkuminen: "Suunnittele matkustus etukäteen ja vertaa eri kulkumuotojen hintoja. Yhteiskyydit tai ajoissa varatut junat/bussit voivat tuoda säästöjä!",
-    Ruokailu: "Hiihtokeskuksilla ruokailu voi nopeasti kasvattaa budjettia – harkitse omia eväitä tai lounastarjouksia.",
-    Majoitus: "Vertaa eri majoitusvaihtoehtoja ja jaa huone kavereiden kanssa, jos mahdollista. Varaamalla ajoissa löydät parhaat hinnat!",
-    Laskettelu: "Hissiliput ja välinevuokra voivat haukata ison osan budjetista. Vertaile keskusten hintoja ja etsi etukäteistarjouksia!",
+    Liikkuminen:
+      "Suunnittele matkustus etukäteen ja vertaa eri kulkumuotojen hintoja. Yhteiskyydit tai ajoissa varatut junat/bussit voivat tuoda säästöjä!",
+    Ruokailu:
+      "Hiihtokeskuksilla ruokailu voi nopeasti kasvattaa budjettia – harkitse omia eväitä tai lounastarjouksia.",
+    Majoitus:
+      "Vertaa eri majoitusvaihtoehtoja ja jaa huone kavereiden kanssa, jos mahdollista. Varaamalla ajoissa löydät parhaat hinnat!",
+    Laskettelu:
+      "Hissiliput ja välinevuokra voivat haukata ison osan budjetista. Vertaile keskusten hintoja ja etsi etukäteistarjouksia!",
   };
 
   const [categories, setCategories] = useState([
@@ -82,9 +86,15 @@ export default function Laskuri() {
   }, [matkanNimi, categories]);
 
   useEffect(() => {
-    const total = categories.reduce((sum, category) =>
-      sum + category.expenses.reduce((cSum, exp) => cSum + (parseFloat(exp.amount) || 0), 0)
-    , 0);
+    const total = categories.reduce(
+      (sum, category) =>
+        sum +
+        category.expenses.reduce(
+          (cSum, exp) => cSum + (parseFloat(exp.amount) || 0),
+          0
+        ),
+      0
+    );
     setKulutYhteensa(total);
   }, [categories]);
 
@@ -144,10 +154,35 @@ export default function Laskuri() {
     }
   };
 
-  const updateExpenseAmount = (categoryIndex, expenseIndex, value) => {
+  // Päivitetään yksittäisen kulun summa
+  const updateExpenseAmount = (categoryIndex, expenseIndex, value, event) => {
     const updated = [...categories];
     updated[categoryIndex].expenses[expenseIndex].amount = value;
     setCategories(updated);
+
+    if (event.key === "Enter") {
+      let nextCategoryIndex = categoryIndex;
+      let nextExpenseIndex = expenseIndex + 1;
+
+      // Jos kululista loppuu, siirrytään seuraavaan kategoriaan
+      if (nextExpenseIndex >= updated[categoryIndex].expenses.length) {
+        nextCategoryIndex = categoryIndex + 1;
+        nextExpenseIndex = 0; // Aloita seuraavasta kategoriasta ensimmäinen kulu
+      }
+
+      // Tarkista että seuraava kategoria on olemassa
+      if (
+        updated[nextCategoryIndex] &&
+        updated[nextCategoryIndex].expenses[nextExpenseIndex]
+      ) {
+        const nextExpenseElement = document.getElementById(
+          `expense-input-${nextCategoryIndex}-${nextExpenseIndex}`
+        );
+        if (nextExpenseElement) {
+          nextExpenseElement.focus();
+        }
+      }
+    }
   };
 
   const saveAsFile = (fileType) => {
@@ -159,15 +194,37 @@ export default function Laskuri() {
 
   return (
     <div className="home">
-      <button className="hampurilaisvalikko" title="Valikko" onClick={() => setValikkoAuki(!valikkoAuki)}>
+      <button
+        className="hampurilaisvalikko"
+        title="Valikko"
+        onClick={() => setValikkoAuki(!valikkoAuki)}
+      >
         {valikkoAuki ? <RiCloseLargeLine /> : <SlMenu />}
       </button>
 
       {valikkoAuki && (
         <div className="valikko-laatikko slide-in">
-          <Link to="/" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Etusivu</Link>
-          <Link to="/ohjeet" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Ohjeet</Link>
-          <Link to="/meista" className="valikko-linkki" onClick={() => setValikkoAuki(false)}>Meistä</Link>
+          <Link
+            to="/"
+            className="valikko-linkki"
+            onClick={() => setValikkoAuki(false)}
+          >
+            Etusivu
+          </Link>
+          <Link
+            to="/ohjeet"
+            className="valikko-linkki"
+            onClick={() => setValikkoAuki(false)}
+          >
+            Ohjeet
+          </Link>
+          <Link
+            to="/meista"
+            className="valikko-linkki"
+            onClick={() => setValikkoAuki(false)}
+          >
+            Meistä
+          </Link>
         </div>
       )}
 
@@ -178,8 +235,19 @@ export default function Laskuri() {
       </h1>
 
       <div className="dropdown-wrapper">
-        <button className="save-budget-button" onClick={() => setDropdownAuki(!dropdownAuki)}>
-          Tallenna budjetti {dropdownAuki ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
+        <button
+          className="save-budget-button"
+          onClick={() => setDropdownAuki(!dropdownAuki)}
+        ></button>
+        Tallenna budjetti
+        {dropdownAuki ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}{" "}
+        {/* Vaihtaa ikonin */}
+        <button
+          className="save-budget-button"
+          onClick={() => setDropdownAuki(!dropdownAuki)}
+        >
+          Tallenna budjetti{" "}
+          {dropdownAuki ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
         </button>
         {dropdownAuki && (
           <ul className="save-dropdown-menu">
@@ -203,14 +271,20 @@ export default function Laskuri() {
         ) : (
           <h2 className="trip-name">
             {matkanNimi}
-            <button onClick={() => setMuokkausKaynnissa(true)} className="edit-button" title="Muokkaa nimeä">
+            <button
+              onClick={() => setMuokkausKaynnissa(true)}
+              className="edit-button"
+              title="Muokkaa nimeä"
+            >
               <FaPen style={{ marginLeft: "8px" }} />
             </button>
           </h2>
         )}
       </div>
 
-      <button className="uusimatka" onClick={aloitaUusiMatka}>+ Uusi matka</button>
+      <button className="uusimatka" onClick={aloitaUusiMatka}>
+        + Uusi matka
+      </button>
 
       <div className="kulut-boksi">
         <div className="kulut-otsikko">Kulut yht.</div>
@@ -226,9 +300,14 @@ export default function Laskuri() {
                 className="info-button"
                 onClick={() => avaaVinkki(category.name)}
                 title="Näytä vinkki"
-                style={{ background: "none", border: "none", cursor: "pointer", color: "#555" }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "#555",
+                }}
               >
-                <CiCircleInfo  />
+                <CiCircleInfo />
               </button>
             </h3>
             <ul>
@@ -241,13 +320,22 @@ export default function Laskuri() {
                     step="5"
                     placeholder="€"
                     value={expense.amount}
-                    onChange={(e) => updateExpenseAmount(i, j, e.target.value)}
+                    onChange={(e) =>
+                      updateExpenseAmount(i, j, e.target.value, e)
+                    }
+                    onKeyDown={(e) =>
+                      updateExpenseAmount(i, j, e.target.value, e)
+                    }
                     className="amount-input"
+                    id={`expense-input-${i}-${j}`}
                   />
                 </li>
               ))}
             </ul>
-            <button className="add-expense-button" onClick={() => addExpenseToCategory(i)}>
+            <button
+              className="add-expense-button"
+              onClick={() => addExpenseToCategory(i)}
+            >
               + Lisää kulu
             </button>
           </div>
@@ -259,16 +347,26 @@ export default function Laskuri() {
           className="vinkkipopup"
           style={{
             position: "fixed",
-            top: 0, left: 0, width: "100vw", height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.5)", display: "flex",
-            justifyContent: "center", alignItems: "center", zIndex: 9999
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
           }}
           onClick={() => setNaytaVinkki(false)}
         >
           <div
             style={{
-              background: "white", padding: "20px", borderRadius: "12px",
-              maxWidth: "400px", textAlign: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+              background: "white",
+              padding: "20px",
+              borderRadius: "12px",
+              maxWidth: "400px",
+              textAlign: "center",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
