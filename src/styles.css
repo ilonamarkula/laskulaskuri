@@ -715,16 +715,16 @@ body {
 .all-expenses-summary {
   display: flex;
   flex-direction: column;
-  align-items: center; /* keskittää vaakasuunnassa */
-  justify-content: center; /* keskittää pystysuunnassa */
-  height: 100%; /* varmistaa että se ottaa koko korkeuden */
-  gap: 12px; /* pieni väli kulujen väliin */
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
 }
 
 .all-expenses-box {
   display: flex;
   flex-direction: column;
-  justify-content: start; /* otsikko ylös */
+  justify-content: center;
   align-items: center;
   margin-top: 80px;
   background-color: white;
@@ -737,14 +737,21 @@ body {
 }
 
 .all-expenses-title {
-  font-size: 1.5rem;
+  margin-top: 20px;
+  font-size: 1.9rem;
   color: #7fc2e1;
   margin-bottom: 4px;
   font-weight: 600;
 }
 
 .all-expenses-total {
-  font-size: 1.8rem; /* sama kuin all-expenses-title */
-  color: #7fc2e1; /* sama väri */
-  font-weight: 600; /* sama paino */
+  font-size: 2.8rem;
+  color: #7fc2e1;
+  font-weight: 600;
+}
+
+.category-summary {
+  font-size: 1rem;
+  color: #ff9ebf;
+  margin-top: 30px;
 }
