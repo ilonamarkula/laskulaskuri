@@ -475,6 +475,7 @@ export default function Laskuri() {
       </div>
       <div className="all-expenses-box">
         <h3 className="all-expenses-title">Kaikki kulut yhteensä</h3>
+        <br />
         <div className="all-expenses-summary">
           <div className="expense-item all-expenses-total">
             {categories.reduce((total, category) => {
@@ -486,6 +487,7 @@ export default function Laskuri() {
             }, 0)}{" "}
             €
           </div>
+          <h2 className="category-summary">Kulut kategorioittain:</h2>
           {categories.map((category, i) => {
             const categoryTotal = category.expenses.reduce(
               (sum, expense) => sum + (parseFloat(expense.amount) || 0),
