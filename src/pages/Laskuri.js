@@ -4,7 +4,7 @@ import { SlMenu } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
-import { GoQuestion } from "react-icons/go";
+import { GoQuestion, GoX } from "react-icons/go";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
@@ -248,6 +248,24 @@ export default function Laskuri() {
         }
       }
     }
+  };
+  const removeExpense = (categoryIndex, expenseIndex) => {
+    console.log(categoryIndex, expenseIndex);
+    const newCategories = categories.map((category, i) => {
+      const filterExpenses = () => {
+        const output = [];
+        category.expenses.map((expense, index) => {
+          if (index !== expenseIndex) output.push(expense);
+        });
+        return output;
+      };
+
+      const newExpenses =
+        categoryIndex === i ? filterExpenses() : category.expenses;
+      return { name: category.name, expenses: newExpenses };
+    });
+
+    setCategories(newCategories);
   };
 
   const saveAsFile = async (fileType) => {
@@ -506,6 +524,7 @@ export default function Laskuri() {
                     className="amount-input"
                     id={`expense-input-${i}-${j}`}
                   />
+                  <GoX onClick={() => removeExpense(i, j)} />
                 </li>
               ))}
             </ul>
