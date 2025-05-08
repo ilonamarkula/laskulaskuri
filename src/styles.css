@@ -371,6 +371,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .amount-input {
