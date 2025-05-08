@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { GoQuestion } from "react-icons/go";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { html2canvas } from "html2canvas";
+import { jsPDF } from "jspdf";
 
 export default function Laskuri() {
   const STORAGE_KEY = "matkaData";
@@ -236,14 +234,14 @@ export default function Laskuri() {
   };
 
   const saveAsFile = async (fileType) => {
-    const content = document.querySelector('.kulukategoriat');
-    
-    switch(fileType) {
-      case 'PDF':
+    const content = document.querySelector(".kulukategoriat");
+
+    switch (fileType) {
+      case "PDF":
         try {
           const canvas = await html2canvas(content);
-          const imgData = canvas.toDataURL('image/png');
-          const pdf = new jsPDF('p', 'mm', 'a4');
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF("p", "mm", "a4");
           const pdfWidth = pdf.internal.pageSize.getWidth();
           const pdfHeight = pdf.internal.pageSize.getHeight();
           const imgWidth = canvas.width;
@@ -251,56 +249,63 @@ export default function Laskuri() {
           const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
           const imgX = (pdfWidth - imgWidth * ratio) / 2;
           const imgY = 30;
-          
-          pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+
+          pdf.addImage(
+            imgData,
+            "PNG",
+            imgX,
+            imgY,
+            imgWidth * ratio,
+            imgHeight * ratio
+          );
           pdf.save(`${matkanNimi}-budjetti.pdf`);
         } catch (error) {
-          console.error('Virhe PDF:n luonnissa:', error);
-          alert('PDF:n tallentaminen epäonnistui');
+          console.error("Virhe PDF:n luonnissa:", error);
+          alert("PDF:n tallentaminen epäonnistui");
         }
         break;
 
-      case 'JPEG':
+      case "JPEG":
         try {
           const canvas = await html2canvas(content);
-          const link = document.createElement('a');
+          const link = document.createElement("a");
           link.download = `${matkanNimi}-budjetti.jpg`;
-          link.href = canvas.toDataURL('image/jpeg', 1.0);
+          link.href = canvas.toDataURL("image/jpeg", 1.0);
           link.click();
         } catch (error) {
-          console.error('Virhe JPEG:n luonnissa:', error);
-          alert('JPEG:n tallentaminen epäonnistui');
+          console.error("Virhe JPEG:n luonnissa:", error);
+          alert("JPEG:n tallentaminen epäonnistui");
         }
         break;
 
-      case 'TXT':
+      case "TXT":
         try {
           let textContent = `${matkanNimi} - Budjetti\n\n`;
           textContent += `Kulut yhteensä: ${kulutYhteensa} €\n\n`;
-          
-          categories.forEach(category => {
+
+          categories.forEach((category) => {
             textContent += `${category.name}:\n`;
-            category.expenses.forEach(expense => {
+            category.expenses.forEach((expense) => {
               if (expense.amount) {
                 textContent += `- ${expense.name}: ${expense.amount} €\n`;
               }
             });
-            textContent += '\n';
+            textContent += "\n";
           });
 
-          const blob = new Blob([textContent], { type: 'text/plain' });
-          const link = document.createElement('a');
+          const blob = new Blob([textContent], { type: "text/plain" });
+          const link = document.createElement("a");
           link.download = `${matkanNimi}-budjetti.txt`;
           link.href = URL.createObjectURL(blob);
           link.click();
           URL.revokeObjectURL(link.href);
         } catch (error) {
-          console.error('Virhe TXT:n luonnissa:', error);
-          alert('TXT:n tallentaminen epäonnistui');
+          console.error("Virhe TXT:n luonnissa:", error);
+          alert("TXT:n tallentaminen epäonnistui");
         }
         break;
     }
-    
+
     setDropdownAuki(false);
   };
 
@@ -390,12 +395,10 @@ export default function Laskuri() {
       <button className="uusimatka" onClick={aloitaUusiMatka}>
         + Uusi matka
       </button>
-
       <div className="kulut-boksi">
         <div className="kulut-otsikko">Kulut yht.</div>
         <div className="kulut-summa">{kulutYhteensa} €</div>
       </div>
-
       <div className="kulukategoriat">
         {categories.map((category, i) => (
           <div key={i} className="category-section">
