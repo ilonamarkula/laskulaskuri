@@ -481,9 +481,9 @@ body {
 
 .dropdown-wrapper {
   position: absolute;
-  bottom: 5px;
-  right: 22px;
-  z-index: 999;
+  bottom: 200px;
+  right: 20px;
+  z-index: 1000;
 }
 
 .dropdown-button {
@@ -680,6 +680,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+  z-index: 1000;
 }
 
 .save-budget-button:hover {
@@ -696,10 +698,11 @@ body {
   border: 2px solid pink;
   border-radius: 12px;
   padding: 8px 0;
-  margin-top: 8px;
+  margin-top: 4px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   list-style: none;
   min-width: 120px;
+  z-index: 1001;
 }
 
 .save-dropdown-menu li {
