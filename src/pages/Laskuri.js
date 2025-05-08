@@ -121,8 +121,8 @@ export default function Laskuri() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const kasitteleNimenSyotto = (e) => {
@@ -324,6 +324,20 @@ export default function Laskuri() {
     setDropdownAuki(false);
   };
 
+  const [henkiloMaara, setHenkiloMaara] = useState("");
+  const totalExpenses = categories.reduce((total, category) => {
+    const categoryTotal = category.expenses.reduce(
+      (sum, expense) => sum + (parseFloat(expense.amount) || 0),
+      0
+    );
+    return total + categoryTotal;
+  }, 0);
+
+  const perPerson =
+    henkiloMaara && parseInt(henkiloMaara) > 0
+      ? (totalExpenses / parseInt(henkiloMaara)).toFixed(2)
+      : null;
+
   if (!loaded) return null;
 
   return (
@@ -507,6 +521,29 @@ export default function Laskuri() {
             );
           })}
         </div>
+      </div>
+
+      <div className="per-person-box">
+        <div className="input-row">
+          <label htmlFor="henkilot-syotto">Jaa kulut </label>
+          <input
+            id="henkilot-syotto"
+            type="number"
+            min="1"
+            step="1"
+            placeholder="henkeä"
+            value={henkiloMaara}
+            onChange={(e) => setHenkiloMaara(e.target.value)}
+            className="person-input"
+          />
+          hengelle
+        </div>
+
+        {perPerson && (
+          <div className="per-person-result">
+            Kulut per henkilö: {perPerson} €
+          </div>
+        )}
       </div>
 
       {naytaVinkki && (
