@@ -2,7 +2,7 @@
   "name": "laskulaskuri",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ilonamarkula.github.io",
+  "homepage": "https://ilonamarkula.github.io/laskulaskuri",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
