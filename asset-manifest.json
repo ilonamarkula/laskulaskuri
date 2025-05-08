@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.65c9acaf.css",
-    "main.js": "/static/js/main.7463af4d.js",
-    "static/js/213.fdbf8504.chunk.js": "/static/js/213.fdbf8504.chunk.js",
-    "static/js/732.1c74a569.chunk.js": "/static/js/732.1c74a569.chunk.js",
-    "static/media/laskutyyppi_transparent.png": "/static/media/laskutyyppi_transparent.341cb54cdd91285e5768.png",
-    "static/media/mountains_transparent.png": "/static/media/mountains_transparent.8540abaa5adbc56b374f.png",
-    "index.html": "/index.html",
-    "main.65c9acaf.css.map": "/static/css/main.65c9acaf.css.map",
-    "main.7463af4d.js.map": "/static/js/main.7463af4d.js.map",
-    "213.fdbf8504.chunk.js.map": "/static/js/213.fdbf8504.chunk.js.map",
-    "732.1c74a569.chunk.js.map": "/static/js/732.1c74a569.chunk.js.map"
+    "main.css": "/laskulaskuri/static/css/main.65c9acaf.css",
+    "main.js": "/laskulaskuri/static/js/main.2608a436.js",
+    "static/js/213.fdbf8504.chunk.js": "/laskulaskuri/static/js/213.fdbf8504.chunk.js",
+    "static/js/732.1c74a569.chunk.js": "/laskulaskuri/static/js/732.1c74a569.chunk.js",
+    "static/media/laskutyyppi_transparent.png": "/laskulaskuri/static/media/laskutyyppi_transparent.341cb54cdd91285e5768.png",
+    "static/media/mountains_transparent.png": "/laskulaskuri/static/media/mountains_transparent.8540abaa5adbc56b374f.png",
+    "index.html": "/laskulaskuri/index.html",
+    "main.65c9acaf.css.map": "/laskulaskuri/static/css/main.65c9acaf.css.map",
+    "main.2608a436.js.map": "/laskulaskuri/static/js/main.2608a436.js.map",
+    "213.fdbf8504.chunk.js.map": "/laskulaskuri/static/js/213.fdbf8504.chunk.js.map",
+    "732.1c74a569.chunk.js.map": "/laskulaskuri/static/js/732.1c74a569.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.65c9acaf.css",
-    "static/js/main.7463af4d.js"
+    "static/js/main.2608a436.js"
   ]
 }
