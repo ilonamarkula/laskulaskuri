@@ -19,6 +19,8 @@ export default function Laskuri() {
   const [dropdownAuki, setDropdownAuki] = useState(false);
   const [naytaVinkki, setNaytaVinkki] = useState(false);
   const [aktiivinenVinkki, setAktiivinenVinkki] = useState("");
+  const [showKulutBoksi, setShowKulutBoksi] = useState(true);
+  const allExpensesRef = useRef(null);
 
   const categoryTips = {
     Liikkuminen:
@@ -109,6 +111,19 @@ export default function Laskuri() {
     );
     setKulutYhteensa(total);
   }, [categories]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (allExpensesRef.current) {
+        const rect = allExpensesRef.current.getBoundingClientRect();
+        // Jos all-expenses-box on näkyvissä (top < window height)
+        setShowKulutBoksi(rect.top > window.innerHeight);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const kasitteleNimenSyotto = (e) => {
     if (e.key === "Enter") {
@@ -395,20 +410,12 @@ export default function Laskuri() {
       <button className="uusimatka" onClick={aloitaUusiMatka}>
         + Uusi matka
       </button>
-      <div className="kulut-boksi">
-        <div className="kulut-otsikko">Kulut yht.</div>
-        <div className="kulut-summa">
-          {categories.reduce((total, category) => {
-            // Laske kuluja yhteensä kaikista kategorioista
-            const categoryTotal = category.expenses.reduce(
-              (sum, expense) => sum + (parseFloat(expense.amount) || 0), // Varmistetaan, että amount on luku
-              0
-            );
-            return total + categoryTotal;
-          }, 0)}{" "}
-          €
+      {showKulutBoksi && (
+        <div className="kulut-boksi">
+          <div className="kulut-otsikko">Kulut yht.</div>
+          <div className="kulut-summa">{kulutYhteensa} €</div>
         </div>
-      </div>
+      )}
       <div className="kulukategoriat">
         {categories.map((category, i) => (
           <div key={i} className="category-section">
@@ -473,7 +480,7 @@ export default function Laskuri() {
           </div>
         ))}
       </div>
-      <div className="all-expenses-box">
+      <div className="all-expenses-box" ref={allExpensesRef}>
         <h3 className="all-expenses-title">Kaikki kulut yhteensä</h3>
         <div className="all-expenses-summary">
           <div className="expense-item all-expenses-total">
