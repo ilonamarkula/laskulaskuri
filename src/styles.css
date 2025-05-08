@@ -488,7 +488,7 @@ body {
 
 .dropdown-wrapper {
   position: absolute;
-  bottom: 60px;
+  bottom: 245px;
   right: 20px;
   z-index: 1000;
 }
@@ -706,8 +706,6 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  position: relative;
-  z-index: 1000;
 }
 
 .save-budget-button:hover {
@@ -751,6 +749,7 @@ body {
 }
 
 .all-expenses-box {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -763,6 +762,7 @@ body {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   font-family: monospace;
   z-index: 998;
+  margin-bottom: 100px;
 }
 
 .all-expenses-title {
