@@ -249,12 +249,19 @@ export default function Laskuri() {
   };
 
   const saveAsFile = async (fileType) => {
-    const content = document.querySelector(".kulukategoriat");
+    
+    const content = document.querySelector(".home");
 
     switch (fileType) {
       case "PDF":
         try {
-          const canvas = await html2canvas(content);
+          const canvas = await html2canvas(content, {
+            scale: 2, 
+            useCORS: true, 
+            logging: false, 
+            windowWidth: content.scrollWidth,
+            windowHeight: content.scrollHeight
+          });
           const imgData = canvas.toDataURL("image/png");
           const pdf = new jsPDF("p", "mm", "a4");
           const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -282,7 +289,13 @@ export default function Laskuri() {
 
       case "JPEG":
         try {
-          const canvas = await html2canvas(content);
+          const canvas = await html2canvas(content, {
+            scale: 2, 
+            useCORS: true, 
+            logging: false, 
+            windowWidth: content.scrollWidth,
+            windowHeight: content.scrollHeight
+          });
           const link = document.createElement("a");
           link.download = `${matkanNimi}-budjetti.jpg`;
           link.href = canvas.toDataURL("image/jpeg", 1.0);
@@ -299,7 +312,11 @@ export default function Laskuri() {
           textContent += `Kulut yhteensä: ${kulutYhteensa} €\n\n`;
 
           categories.forEach((category) => {
-            textContent += `${category.name}:\n`;
+            const categoryTotal = category.expenses.reduce(
+              (sum, expense) => sum + (parseFloat(expense.amount) || 0),
+              0
+            );
+            textContent += `${category.name}: ${categoryTotal} €\n`;
             category.expenses.forEach((expense) => {
               if (expense.amount) {
                 textContent += `- ${expense.name}: ${expense.amount} €\n`;
@@ -307,6 +324,11 @@ export default function Laskuri() {
             });
             textContent += "\n";
           });
+
+          if (henkiloMaara && parseInt(henkiloMaara) > 0) {
+            const perPerson = (kulutYhteensa / parseInt(henkiloMaara)).toFixed(2);
+            textContent += `\nKulut per henkilö (${henkiloMaara} henkeä): ${perPerson} €\n`;
+          }
 
           const blob = new Blob([textContent], { type: "text/plain" });
           const link = document.createElement("a");
