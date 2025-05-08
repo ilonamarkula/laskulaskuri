@@ -18,6 +18,7 @@ export default function Laskuri() {
   const [valikkoAuki, setValikkoAuki] = useState(false);
   const [dropdownAuki, setDropdownAuki] = useState(false);
   const [naytaVinkki, setNaytaVinkki] = useState(false);
+  const [naytaVarmistus, setNaytaVarmistus] = useState(false);
   const [aktiivinenVinkki, setAktiivinenVinkki] = useState("");
   const [showKulutBoksi, setShowKulutBoksi] = useState(true);
   const allExpensesRef = useRef(null);
@@ -137,6 +138,7 @@ export default function Laskuri() {
   };
 
   const aloitaUusiMatka = () => {
+    setNaytaVarmistus(false);
     localStorage.removeItem(STORAGE_KEY);
     setMatkanNimi("Laskettelumatka");
     setTilapNimi("Laskettelumatka");
@@ -398,9 +400,9 @@ export default function Laskuri() {
         </div>
       )}
 
-      <h1 className="title">
-        <Link to="/">LASKULASKURI</Link>
-      </h1>
+      <Link to="/" className="title">
+        LASKULASKURI
+      </Link>
 
       <div className="dropdown-wrapper">
         <button
@@ -443,7 +445,7 @@ export default function Laskuri() {
         )}
       </div>
 
-      <button className="uusimatka" onClick={aloitaUusiMatka}>
+      <button className="uusimatka" onClick={() => setNaytaVarmistus(true)}>
         + Uusi matka
       </button>
       {showKulutBoksi && (
@@ -578,6 +580,35 @@ export default function Laskuri() {
             <p className="vinkkiteksti">{aktiivinenVinkki}</p>
             <div style={{ marginTop: "1rem", textAlign: "right" }}>
               <button onClick={() => setNaytaVinkki(false)}>Sulje</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {naytaVarmistus && (
+        <div className="vinkkipopup" onClick={() => setNaytaVarmistus(false)}>
+          <div
+            className="vinkkipopup-laatikko"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="vinkkipopup-otsikko">
+              Haluatko varmasti aloittaa uuden matkan?
+            </h3>
+            <p className="vinkkiteksti">Vanha matka poistuu.</p>
+
+            <div className="vinkkipopup-napit">
+              <div
+                className="vinkkipopup-nappi"
+                onClick={() => aloitaUusiMatka()}
+              >
+                Kyllä
+              </div>
+              <div
+                className="vinkkipopup-nappi"
+                onClick={() => setNaytaVarmistus(false)}
+              >
+                Ei
+              </div>
             </div>
           </div>
         </div>
