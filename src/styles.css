@@ -460,9 +460,8 @@ body {
   z-index: 999;
   cursor: pointer;
   transition: none;
-  transition: none; 
+  transition: none;
 }
-
 
 .back-home-button:hover {
   transform: none;
@@ -480,7 +479,7 @@ body {
   position: absolute;
   bottom: 5px;
   right: 22px;
-  z-index: 999; 
+  z-index: 999;
 }
 
 .dropdown-button {
@@ -497,8 +496,6 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
-
 .kulunlisays-nappi {
   font-size: 1rem;
   padding: 10px 14px;
@@ -511,7 +508,7 @@ body {
   border: 2px solid pink;
   position: absolute;
   top: 150px;
-  left: 90px; 
+  left: 90px;
   left: 90px;
   z-index: 10;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -576,7 +573,6 @@ body {
   color: #555;
 }
 
-
 .vinkkipopup-otsikko {
   font-size: 1.2rem;
   font-weight: bold;
@@ -591,11 +587,11 @@ body {
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border: 3px solid #8ecae6;
-  position: relative; 
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
-  min-height: 150px; 
+  justify-content: flex-start;
+  min-height: 150px;
 }
 
 .vinkkipopup-laatikko button {
@@ -610,13 +606,11 @@ body {
   gap: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  position: absolute; 
-  bottom: 10px; 
-  left: 50%; 
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
   transform: translateX(-50%);
 }
-
-
 
 .vinkkipopup {
   position: fixed;
@@ -624,7 +618,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: transparent; 
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -712,4 +706,30 @@ body {
 
 .save-dropdown-menu li:hover {
   background-color: #ffe6ec;
+}
+
+.all-expenses-box {
+  position: center;
+  margin-top: 80px; /* korkeampi kuin kulut-boksi, jotta ei mene päällekkäin */
+  background-color: white;
+  border: 2px solid #8ecae6;
+  padding: 100px 250px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  font-family: monospace;
+  z-index: 998;
+}
+
+.all-expenses-title {
+  font-size: 1.5rem;
+  color: #7fc2e1;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.all-expenses-total {
+  font-size: 1.8rem; /* sama kuin all-expenses-title */
+  color: #7fc2e1; /* sama väri */
+  font-weight: 600; /* sama paino */
 }

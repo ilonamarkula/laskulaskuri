@@ -397,7 +397,17 @@ export default function Laskuri() {
       </button>
       <div className="kulut-boksi">
         <div className="kulut-otsikko">Kulut yht.</div>
-        <div className="kulut-summa">{kulutYhteensa} €</div>
+        <div className="kulut-summa">
+          {categories.reduce((total, category) => {
+            // Laske kuluja yhteensä kaikista kategorioista
+            const categoryTotal = category.expenses.reduce(
+              (sum, expense) => sum + (parseFloat(expense.amount) || 0), // Varmistetaan, että amount on luku
+              0
+            );
+            return total + categoryTotal;
+          }, 0)}{" "}
+          €
+        </div>
       </div>
       <div className="kulukategoriat">
         {categories.map((category, i) => (
@@ -463,6 +473,33 @@ export default function Laskuri() {
           </div>
         ))}
       </div>
+      <div className="all-expenses-box">
+        <h3 className="all-expenses-title">Kaikki kulut yhteensä</h3>
+        <div className="all-expenses-summary">
+          <div className="expense-item all-expenses-total">
+            {categories.reduce((total, category) => {
+              const categoryTotal = category.expenses.reduce(
+                (sum, expense) => sum + (parseFloat(expense.amount) || 0),
+                0
+              );
+              return total + categoryTotal;
+            }, 0)}{" "}
+            €
+          </div>
+          {categories.map((category, i) => {
+            const categoryTotal = category.expenses.reduce(
+              (sum, expense) => sum + (parseFloat(expense.amount) || 0),
+              0
+            );
+            return (
+              <div className="expense-item" key={i}>
+                {category.name}: {categoryTotal} €
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       {naytaVinkki && (
         <div className="vinkkipopup" onClick={() => setNaytaVinkki(false)}>
           <div
