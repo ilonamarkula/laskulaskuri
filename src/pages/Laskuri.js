@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { GoQuestion } from "react-icons/go";
-import { html2canvas } from "html2canvas";
-import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export default function Laskuri() {
   const STORAGE_KEY = "matkaData";
