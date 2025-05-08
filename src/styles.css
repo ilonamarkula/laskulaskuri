@@ -790,14 +790,13 @@ body {
   font-family: "Andale Mono", monospace;
   font-size: 0.9rem;
   display: flex;
-  flex-direction: column; /* Asettaa elementit pystysuoraan */
-  gap: 10px; /* Väli rivien väliin */
+  flex-direction: column;
+  gap: 10px;
   padding: 15px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 500px;
-  margin: 40px;
 }
 
 .input-row {
@@ -806,7 +805,6 @@ body {
   gap: 0.5rem;
 }
 
-/* Syöttökenttä pysyy samana */
 .person-input {
   font-size: 0.9rem;
   font-family: "Andale Mono", monospace;
